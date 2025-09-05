@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eaglercraft Selector</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #1e1e2e;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+    }
+
+    .box {
+      background: #2e2e3e;
+      padding: 40px 60px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .box:hover {
+      background: #3e3e5e;
+      transform: translateY(-5px);
+    }
+
+    .box h2 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <a href="version/1.8/">
+      <div class="box">
+        <h2>Eaglercraft 1.8</h2>
+      </div>
+    </a>
+    <a href="version/1.12.2/">
+      <div class="box">
+        <h2>Eaglercraft 1.12.2</h2>
+      </div>
+    </a>
+  </div>
+</body>
+
+</html>
