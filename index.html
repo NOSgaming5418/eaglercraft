@@ -4,72 +4,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eaglercraft Selector</title>
+  <title>Classroom</title>
+  <!-- Favicon: change the href to any .ico URL, or a local file like "favicon.ico" -->
+  <link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/classroom/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
+    /* Want the real Minecraft font? Drop a .woff2 next to this file and uncomment:
+    @font-face { font-family: "Minecraft"; src: url("Minecraft.woff2") format("woff2"); }
+    then change --font to: "Minecraft", "Press Start 2P", monospace; */
+    :root {
+      --font: "Press Start 2P", "Courier New", monospace;
+      --dirt: #4a3321;
+      --dirt-dark: #3a281a;
+      --grass: #5d9b32;
+      --grass-dark: #447a22;
+      --stone: #8b8b8b;
+      --stone-light: #b5b5b5;
+      --stone-dark: #4d4d4d;
+      --gold: #ffff55;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
     body {
+      margin: 0;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: #1e1e2e;
-      font-family: Arial, sans-serif;
+      gap: 48px;
+      padding: 32px 16px;
+      font-family: var(--font);
       color: #fff;
+      background-color: var(--dirt-dark);
+      background-image:
+        linear-gradient(rgba(0, 0, 0, .55), rgba(0, 0, 0, .55)),
+        radial-gradient(circle at 25% 30%, #5b4129 0 4px, transparent 5px),
+        radial-gradient(circle at 75% 70%, #2f2014 0 4px, transparent 5px),
+        radial-gradient(circle at 60% 20%, #6b5035 0 3px, transparent 4px);
+      background-size: auto, 64px 64px, 64px 64px, 64px 64px;
+      image-rendering: pixelated;
+    }
+
+    header { text-align: center; }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: clamp(1.6rem, 6vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: #d8d8d8;
+      text-shadow:
+        4px 4px 0 #3b3b3b,
+        8px 8px 0 rgba(0, 0, 0, .45);
+      letter-spacing: 2px;
+    }
+
+    .tagline {
+      margin: 0;
+      font-size: clamp(.6rem, 2vw, .85rem);
+      line-height: 1.6;
+      color: var(--gold);
+      text-shadow: 2px 2px 0 #3f3f15;
+      display: inline-block;
+      animation: bob 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes bob {
+      from { transform: rotate(-3deg) scale(1); }
+      to { transform: rotate(-3deg) scale(1.08); }
     }
 
     .container {
-      display: flex;
-      gap: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      width: min(760px, 100%);
     }
 
+    .container a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    /* Grass-block style card */
     .box {
-      background: #2e2e3e;
-      padding: 40px 60px;
-      border-radius: 12px;
+      position: relative;
+      padding: 52px 20px 28px;
       text-align: center;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.3s;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      background: var(--dirt);
+      border: 4px solid #000;
+      box-shadow:
+        inset -4px -4px 0 rgba(0, 0, 0, .35),
+        inset 4px 4px 0 rgba(255, 255, 255, .08),
+        6px 6px 0 rgba(0, 0, 0, .5);
+      transition: transform .1s steps(2);
     }
 
-    .box:hover {
-      background: #3e3e5e;
-      transform: translateY(-5px);
+    .box::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 28px;
+      background:
+        linear-gradient(var(--grass) 0 70%, var(--grass-dark) 70%);
+      border-bottom: 4px solid #000;
     }
 
     .box h2 {
       margin: 0;
-      font-size: 1.5em;
+      font-size: .9rem;
+      font-weight: 400;
+      line-height: 1.6;
+      text-shadow: 2px 2px 0 #3f3f3f;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    .box small {
+      display: block;
+      margin-top: 12px;
+      font-size: .55rem;
+      color: var(--stone-light);
+      text-shadow: 2px 2px 0 #2a2a2a;
+    }
+
+    /* Menu-button hover: lighter block, yellow text, like Minecraft */
+    .container a:hover .box,
+    .container a:focus-visible .box {
+      transform: translate(-3px, -3px);
+      background: #5e442c;
+    }
+
+    .container a:hover h2,
+    .container a:focus-visible h2 { color: var(--gold); text-shadow: 2px 2px 0 #3f3f15; }
+
+    .container a:focus-visible { outline: 4px solid var(--gold); outline-offset: 6px; }
+
+    .container a:active .box {
+      transform: translate(2px, 2px);
+      box-shadow: inset -4px -4px 0 rgba(0, 0, 0, .35), 2px 2px 0 rgba(0, 0, 0, .5);
+    }
+
+    /* Beta card spans the full row under the 2x2 grid */
+    .container a.wide { grid-column: 1 / -1; }
+
+    .box small.beta { color: var(--gold); text-shadow: 2px 2px 0 #3f3f15; }
+
+    footer {
+      font-size: .55rem;
+      color: var(--stone-light);
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    @media (max-width: 560px) {
+      .container { grid-template-columns: 1fr; }
+      body { justify-content: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tagline { animation: none; transform: rotate(-3deg); }
+      .box { transition: none; }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <header>
+    <h1>Eaglercraft</h1>
+    <p class="tagline">Pick a version to play!</p>
+  </header>
+
+  <main class="container">
     <a href="version/1.8/">
       <div class="box">
         <h2>Eaglercraft 1.8</h2>
+        <small>Classic</small>
       </div>
     </a>
     <a href="version/1.8-wasm/">
       <div class="box">
         <h2>Eaglercraft 1.8 Wasm</h2>
+        <small>Faster</small>
       </div>
-      <a href="version/1.12.2/">
-        <div class="box">
-          <h2>Eaglercraft 1.12.2</h2>
-        </div>
-        <a href="version/1.12.2-wasm/">
-          <div class="box">
-            <h2>Eaglercraft 1.12.2 Wasm</h2>
-          </div>
-        </a>
-  </div>
+    </a>
+    <a href="version/1.12.2/">
+      <div class="box">
+        <h2>Eaglercraft 1.12.2</h2>
+        <small>Classic</small>
+      </div>
+    </a>
+    <a href="version/1.12.2-wasm/">
+      <div class="box">
+        <h2>Eaglercraft 1.12.2 Wasm</h2>
+        <small>Faster</small>
+      </div>
+    </a>
+    <a href="version/26.2/" class="wide">
+      <div class="box">
+        <h2>Eaglercraft 26.2 (beta)</h2>
+        <small class="beta">Newest, may have bugs</small>
+      </div>
+    </a>
+  </main>
+
+  <footer>Not affiliated with Mojang or Microsoft</footer>
 </body>
 
 </html>
