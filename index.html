@@ -226,4 +226,468 @@
   <footer>Not affiliated with Mojang or Microsoft</footer>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom</title>
+  <!-- Favicon: change the href to any .ico URL, or a local file like "favicon.ico" -->
+  <link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/classroom/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    /* Want the real Minecraft font? Add an @font-face for "Minecraft" below and put it first in fontFamily.mc */
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { mc: ['"Press Start 2P"', '"Courier New"', 'monospace'] },
+          colors: {
+            dirt: '#4a3321', dirtdark: '#3a281a', grass: '#5d9b32', grassdark: '#447a22',
+            stone: '#8b8b8b', stonelight: '#b5b5b5', stonedark: '#4d4d4d', gold: '#ffff55'
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .mc-btn {
+        @apply cursor-pointer border-[3px] border-black bg-stone font-mc text-[0.6rem] text-white
+               shadow-[inset_-3px_-3px_0_#4d4d4d,inset_3px_3px_0_#b5b5b5] [text-shadow:2px_2px_0_#3f3f3f]
+               hover:bg-[#7a8bd0] hover:text-gold focus-visible:bg-[#7a8bd0] focus-visible:text-gold focus-visible:outline-none;
+      }
+      .mc-btn[data-active="true"] {
+        @apply bg-grass text-gold shadow-[inset_-3px_-3px_0_#447a22,inset_3px_3px_0_#86c25a];
+      }
+      .mc-card {
+        @apply relative block overflow-hidden border-4 border-black bg-dirt px-4 pb-6 pt-14 text-center
+               shadow-[inset_-4px_-4px_0_rgba(0,0,0,.35),inset_4px_4px_0_rgba(255,255,255,.08),6px_6px_0_rgba(0,0,0,.5)]
+               transition-transform duration-100 hover:-translate-x-1 hover:-translate-y-1 hover:bg-[#5e442c]
+               focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-gold active:translate-x-0.5 active:translate-y-0.5;
+      }
+      .mc-card::before {
+        content: ""; @apply absolute inset-x-0 top-0 h-7 border-b-4 border-black bg-grass;
+        box-shadow: inset 0 -8px 0 #447a22;
+      }
+      .mc-card:hover h2 { @apply text-gold [text-shadow:2px_2px_0_#3f3f15]; }
+    }
+    body {
+      background-color: #3a281a;
+      background-image:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        radial-gradient(circle at 25% 30%, #5b4129 0 4px, transparent 5px),
+        radial-gradient(circle at 75% 70%, #2f2014 0 4px, transparent 5px),
+        radial-gradient(circle at 60% 20%, #6b5035 0 3px, transparent 4px);
+      background-size: auto, 64px 64px, 64px 64px, 64px 64px;
+      background-attachment: fixed;
+    }
+    [hidden] { display: none !important; }
+    @keyframes bob { from { transform: rotate(-3deg) scale(1); } to { transform: rotate(-3deg) scale(1.08); } }
+    .bob { animation: bob 1.4s ease-in-out infinite alternate; }
+    @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.18) rotate(-2deg); } 100% { transform: scale(1); } }
+    @keyframes flash { 0% { box-shadow: 0 0 0 0 rgba(134,194,90,.9); } 100% { box-shadow: 0 0 0 14px rgba(134,194,90,0); } }
+    .mc-btn[data-copied="true"] {
+      background-color: #5d9b32; color: #ffff55;
+      box-shadow: inset -3px -3px 0 #447a22, inset 3px 3px 0 #86c25a;
+      animation: pop .3s ease-out, flash .6s ease-out;
+    }
+    @media (prefers-reduced-motion: reduce) { .bob { animation: none; transform: rotate(-3deg); } .mc-btn[data-copied="true"] { animation: none; } }
+  </style>
+</head>
+
+<body class="min-h-screen font-mc text-white antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 border-b-4 border-black bg-black/80 backdrop-blur">
+    <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 px-4 py-3 sm:justify-between">
+      <span class="text-sm text-gold [text-shadow:2px_2px_0_#3f3f15] sm:text-base">Classroom</span>
+      <nav class="flex gap-3">
+        <button class="mc-btn tab px-4 py-3 sm:px-6" type="button" data-tab="play" data-active="true">Play</button>
+        <button class="mc-btn tab px-4 py-3 sm:px-6" type="button" data-tab="servers" data-active="false">Servers</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto flex w-full max-w-3xl flex-col items-center gap-10 px-4 py-10 sm:py-14">
+
+    <!-- Play tab -->
+    <section class="tab-play flex w-full flex-col items-center gap-10">
+      <div class="text-center">
+        <h1 class="mb-6 break-words px-2 text-2xl leading-tight tracking-wider text-[#d8d8d8] [text-shadow:4px_4px_0_#3b3b3b,8px_8px_0_rgba(0,0,0,.45)] sm:text-4xl md:text-5xl lg:text-6xl">Eaglercraft</h1>
+        <p class="bob inline-block text-[0.6rem] leading-relaxed text-gold [text-shadow:2px_2px_0_#3f3f15] sm:text-xs">Pick a version to play!</p>
+      </div>
+      <div id="version-grid" class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2"></div>
+    </section>
+
+    <!-- Servers tab -->
+    <section class="tab-servers w-full border-4 border-black bg-black/55 p-4 text-center shadow-[inset_4px_4px_0_rgba(255,255,255,.08),6px_6px_0_rgba(0,0,0,.5)] sm:p-6" hidden>
+      <h3 class="mb-5 text-sm text-gold [text-shadow:2px_2px_0_#3f3f15]">Servers</h3>
+      <div id="server-rows"></div>
+      <p id="copy-hint" class="mt-3 text-[0.5rem] leading-relaxed text-stonelight">Snapshot of the top servers from eaglercraft.com</p>
+      <p class="mt-3 text-[0.5rem]"><a class="text-gold hover:underline" href="https://eaglercraft.com/servers" target="_blank" rel="noopener">View the full live list &raquo;</a></p>
+    </section>
+
+  </main>
+
+  <footer class="px-4 pb-8 text-center text-[0.5rem] text-stonelight [text-shadow:2px_2px_0_#000]">Not affiliated with Mojang or Microsoft</footer>
+
+  <script>
+    // Edit these lists to add/remove cards. href can be a folder, a file, or a full URL.
+    const VERSIONS = [
+      { name: "Eaglercraft 1.8", label: "Classic", href: "version/1.8/" },
+      { name: "Eaglercraft 1.8 Wasm", label: "Faster", href: "version/1.8-wasm/" },
+      { name: "Eaglercraft 1.12.2", label: "Classic", href: "version/1.12.2/" },
+      { name: "Eaglercraft 1.12.2 Wasm", label: "Faster", href: "version/1.12.2-wasm/" },
+      { name: "Eaglercraft 1.14.4 Wasm-GC", label: "Offline", href: "version/1.14-wasm/index.html" },
+      { name: "EaglercraftX 1.20.6 Wasm-GC", label: "Offline", href: "version/1.20.6-wasm/index.html" },
+      { name: "Galactic-Client-8.0", label: "Hacked client", href: "version/galactic-client-8.0/" },
+      { name: "DeathClient-EaglerCraft", label: "Hacked client", href: "https://github.com/Death68093/DeathClient-EaglerCraft-", external: true },
+      { name: "Eaglercraft 26.2 (beta)", label: "Newest, may have bugs", href: "version/26.2/", beta: true },
+      { name: "Eaglercraft 26.2 u1 (beta)", label: "Offline, may have bugs", href: "version/26.2-u1/index.html", beta: true }
+    ];
+
+    const SERVERS = [
+      { name: "Nos Gaming Alt (Main Server)", ip: "wss://nosgamingalt.play.minekube.net", main: true },
+      { name: "ArchMC", ip: "wss://arch.mc" },
+      { name: "HeartSMP", ip: "wss://play.heartsmp.net" },
+      { name: "8b4t", ip: "wss://8b4t.org" },
+      { name: "Voidsent MC", ip: "wss://mc.voidsent.net" },
+      { name: "Pixel Craft", ip: "wss://pcsmp.net" },
+      { name: "MercuryMC", ip: "wss://mercurymc.net" },
+      { name: "Zentic Network", ip: "wss://zentic.cc" },
+      { name: "Dumb Shit Survival X", ip: "wss://mc.dssx.uk" },
+      { name: "FKAS Survival", ip: "wss://eaglercraft.co.uk" },
+      { name: "ZythMC", ip: "wss://mc.zyth.me" },
+      { name: "null's World", ip: "wss://nullsworld.net" },
+      { name: "SME MC", ip: "wss://play.sme-mc.us" }
+    ];
+
+    // Version cards
+    const grid = document.getElementById("version-grid");
+    VERSIONS.forEach(function (v) {
+      const a = document.createElement("a");
+      a.href = v.href;
+      a.className = "mc-card";
+      if (v.external) { a.target = "_blank"; a.rel = "noopener"; }
+      const h2 = document.createElement("h2");
+      h2.className = "break-words text-[0.7rem] leading-relaxed [text-shadow:2px_2px_0_#3f3f3f] sm:text-xs";
+      h2.textContent = v.name;
+      const small = document.createElement("small");
+      small.className = "mt-3 block text-[0.5rem] " + (v.beta ? "text-gold" : "text-stonelight");
+      small.textContent = v.label;
+      a.append(h2, small);
+      grid.appendChild(a);
+    });
+
+    // Server rows
+    const hint = document.getElementById("copy-hint");
+    const defaultHint = hint.textContent;
+
+    function copyText(text, btn) {
+      const done = function () {
+        hint.textContent = "Copied " + text + "!";
+        btn.textContent = "Copied IP!";
+        btn.dataset.copied = "true";
+        clearTimeout(btn._t);
+        btn._t = setTimeout(function () {
+          btn.textContent = "Copy IP";
+          delete btn.dataset.copied;
+          hint.textContent = defaultHint;
+        }, 1800);
+      };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {});
+      } else {
+        const t = document.createElement("textarea");
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        t.remove();
+        done();
+      }
+    }
+
+    const rows = document.getElementById("server-rows");
+    SERVERS.forEach(function (s) {
+      const row = document.createElement("div");
+      row.className = "mb-3 flex flex-wrap items-center gap-3 border-[3px] border-black p-3 text-left shadow-[inset_-3px_-3px_0_rgba(0,0,0,.35),inset_3px_3px_0_rgba(255,255,255,.08)] " + (s.main ? "bg-[#3f6a24]" : "bg-dirt");
+
+      const info = document.createElement("div");
+      info.className = "min-w-0 flex-1 basis-52";
+      const name = document.createElement("span");
+      name.className = "block text-[0.6rem] leading-relaxed [text-shadow:2px_2px_0_#2a2a2a]";
+      name.textContent = (s.main ? "\u2605 " : "") + s.name;
+      const ip = document.createElement("span");
+      ip.className = "mt-1.5 block break-all text-[0.5rem] text-stonelight";
+      ip.textContent = s.ip;
+      info.append(name, ip);
+
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "mc-btn min-w-[8.5rem] px-3 py-2.5";
+      copy.textContent = "Copy IP";
+      copy.addEventListener("click", function () { copyText(s.ip, copy); });
+
+      const join = document.createElement("a");
+      join.className = "mc-btn inline-block px-3 py-2.5";
+      join.textContent = "Join";
+      join.target = "_blank";
+      join.rel = "noopener";
+      join.href = "https://eaglercraft.com/play?joinServer=" + encodeURIComponent(s.ip) + "&version=1.8.8";
+
+      row.append(info, copy, join);
+      rows.appendChild(row);
+    });
+
+    // Tab switching
+    document.querySelectorAll(".tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        const target = tab.dataset.tab;
+        document.querySelectorAll(".tab").forEach(function (t) { t.dataset.active = String(t === tab); });
+        document.querySelectorAll(".tab-play").forEach(function (el) { el.hidden = target !== "play"; });
+        document.querySelectorAll(".tab-servers").forEach(function (el) { el.hidden = target !== "servers"; });
+      });
+    });
+  </script>
+</body>
+
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom</title>
+  <!-- Favicon: change the href to any .ico URL, or a local file like "favicon.ico" -->
+  <link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/classroom/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    /* Want the real Minecraft font? Add an @font-face for "Minecraft" below and put it first in fontFamily.mc */
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { mc: ['"Press Start 2P"', '"Courier New"', 'monospace'] },
+          colors: {
+            dirt: '#4a3321', dirtdark: '#3a281a', grass: '#5d9b32', grassdark: '#447a22',
+            stone: '#8b8b8b', stonelight: '#b5b5b5', stonedark: '#4d4d4d', gold: '#ffff55'
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .mc-btn {
+        @apply cursor-pointer border-[3px] border-black bg-stone font-mc text-[0.6rem] text-white
+               shadow-[inset_-3px_-3px_0_#4d4d4d,inset_3px_3px_0_#b5b5b5] [text-shadow:2px_2px_0_#3f3f3f]
+               hover:bg-[#7a8bd0] hover:text-gold focus-visible:bg-[#7a8bd0] focus-visible:text-gold focus-visible:outline-none;
+      }
+      .mc-btn[data-active="true"] {
+        @apply bg-grass text-gold shadow-[inset_-3px_-3px_0_#447a22,inset_3px_3px_0_#86c25a];
+      }
+      .mc-card {
+        @apply relative block overflow-hidden border-4 border-black bg-dirt px-4 pb-6 pt-14 text-center
+               shadow-[inset_-4px_-4px_0_rgba(0,0,0,.35),inset_4px_4px_0_rgba(255,255,255,.08),6px_6px_0_rgba(0,0,0,.5)]
+               transition-transform duration-100 hover:-translate-x-1 hover:-translate-y-1 hover:bg-[#5e442c]
+               focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-gold active:translate-x-0.5 active:translate-y-0.5;
+      }
+      .mc-card::before {
+        content: ""; @apply absolute inset-x-0 top-0 h-7 border-b-4 border-black bg-grass;
+        box-shadow: inset 0 -8px 0 #447a22;
+      }
+      .mc-card:hover h2 { @apply text-gold [text-shadow:2px_2px_0_#3f3f15]; }
+    }
+    body {
+      background-color: #3a281a;
+      background-image:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        radial-gradient(circle at 25% 30%, #5b4129 0 4px, transparent 5px),
+        radial-gradient(circle at 75% 70%, #2f2014 0 4px, transparent 5px),
+        radial-gradient(circle at 60% 20%, #6b5035 0 3px, transparent 4px);
+      background-size: auto, 64px 64px, 64px 64px, 64px 64px;
+      background-attachment: fixed;
+    }
+    [hidden] { display: none !important; }
+    @keyframes bob { from { transform: rotate(-3deg) scale(1); } to { transform: rotate(-3deg) scale(1.08); } }
+    .bob { animation: bob 1.4s ease-in-out infinite alternate; }
+    @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.18) rotate(-2deg); } 100% { transform: scale(1); } }
+    @keyframes flash { 0% { box-shadow: 0 0 0 0 rgba(134,194,90,.9); } 100% { box-shadow: 0 0 0 14px rgba(134,194,90,0); } }
+    .mc-btn[data-copied="true"] {
+      background-color: #5d9b32; color: #ffff55;
+      box-shadow: inset -3px -3px 0 #447a22, inset 3px 3px 0 #86c25a;
+      animation: pop .3s ease-out, flash .6s ease-out;
+    }
+    @media (prefers-reduced-motion: reduce) { .bob { animation: none; transform: rotate(-3deg); } .mc-btn[data-copied="true"] { animation: none; } }
+  </style>
+</head>
+
+<body class="min-h-screen font-mc text-white antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 border-b-4 border-black bg-black/80 backdrop-blur">
+    <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 px-4 py-3 sm:justify-between">
+      <span class="text-sm text-gold [text-shadow:2px_2px_0_#3f3f15] sm:text-base">Classroom</span>
+      <nav class="flex gap-3">
+        <button class="mc-btn tab px-4 py-3 sm:px-6" type="button" data-tab="play" data-active="true">Play</button>
+        <button class="mc-btn tab px-4 py-3 sm:px-6" type="button" data-tab="servers" data-active="false">Servers</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto flex w-full max-w-3xl flex-col items-center gap-10 px-4 py-10 sm:py-14">
+
+    <!-- Play tab -->
+    <section class="tab-play flex w-full flex-col items-center gap-10">
+      <div class="text-center">
+        <h1 class="mb-6 break-words px-2 text-2xl leading-tight tracking-wider text-[#d8d8d8] [text-shadow:4px_4px_0_#3b3b3b,8px_8px_0_rgba(0,0,0,.45)] sm:text-4xl md:text-5xl lg:text-6xl">Eaglercraft</h1>
+        <p class="bob inline-block text-[0.6rem] leading-relaxed text-gold [text-shadow:2px_2px_0_#3f3f15] sm:text-xs">Pick a version to play!</p>
+      </div>
+      <div id="version-grid" class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2"></div>
+    </section>
+
+    <!-- Servers tab -->
+    <section class="tab-servers w-full border-4 border-black bg-black/55 p-4 text-center shadow-[inset_4px_4px_0_rgba(255,255,255,.08),6px_6px_0_rgba(0,0,0,.5)] sm:p-6" hidden>
+      <h3 class="mb-5 text-sm text-gold [text-shadow:2px_2px_0_#3f3f15]">Servers</h3>
+      <div id="server-rows"></div>
+      <p id="copy-hint" class="mt-3 text-[0.5rem] leading-relaxed text-stonelight">Snapshot of the top servers from eaglercraft.com</p>
+      <p class="mt-3 text-[0.5rem]"><a class="text-gold hover:underline" href="https://eaglercraft.com/servers" target="_blank" rel="noopener">View the full live list &raquo;</a></p>
+    </section>
+
+  </main>
+
+  <footer class="px-4 pb-8 text-center text-[0.5rem] text-stonelight [text-shadow:2px_2px_0_#000]">Not affiliated with Mojang or Microsoft</footer>
+
+  <script>
+    // Edit these lists to add/remove cards. href can be a folder, a file, or a full URL.
+    const VERSIONS = [
+      { name: "Eaglercraft 1.8", label: "Classic", href: "version/1.8/" },
+      { name: "Eaglercraft 1.8 Wasm", label: "Faster", href: "version/1.8-wasm/" },
+      { name: "Eaglercraft 1.12.2", label: "Classic", href: "version/1.12.2/" },
+      { name: "Eaglercraft 1.12.2 Wasm", label: "Faster", href: "version/1.12.2-wasm/" },
+      { name: "Eaglercraft 1.14.4 Wasm-GC", label: "Offline", href: "Eaglercraft_1.14.4_WASM-GC_Offline_Download.html" },
+      { name: "EaglercraftX 1.20.6 Wasm-GC", label: "Offline", href: "EaglercraftX_1.20.6_WASM-GC_Offline_Download.html" },
+      { name: "Galactic-Client-8.0", label: "Hacked client", href: "version/galactic-client-8.0/" },
+      { name: "DeathClient-EaglerCraft", label: "Hacked client", href: "https://github.com/Death68093/DeathClient-EaglerCraft-", external: true },
+      { name: "Eaglercraft 26.2 (beta)", label: "Newest, may have bugs", href: "version/26.2/", beta: true },
+      { name: "Eaglercraft 26.2 u1 (beta)", label: "Offline, may have bugs", href: "eaglercraft-26.2-u1.html", beta: true }
+    ];
+
+    const SERVERS = [
+      { name: "Nos Gaming Alt (Main Server)", ip: "wss://nosgamingalt.play.minekube.net", main: true },
+      { name: "ArchMC", ip: "wss://arch.mc" },
+      { name: "HeartSMP", ip: "wss://play.heartsmp.net" },
+      { name: "8b4t", ip: "wss://8b4t.org" },
+      { name: "Voidsent MC", ip: "wss://mc.voidsent.net" },
+      { name: "Pixel Craft", ip: "wss://pcsmp.net" },
+      { name: "MercuryMC", ip: "wss://mercurymc.net" },
+      { name: "Zentic Network", ip: "wss://zentic.cc" },
+      { name: "Dumb Shit Survival X", ip: "wss://mc.dssx.uk" },
+      { name: "FKAS Survival", ip: "wss://eaglercraft.co.uk" },
+      { name: "ZythMC", ip: "wss://mc.zyth.me" },
+      { name: "null's World", ip: "wss://nullsworld.net" },
+      { name: "SME MC", ip: "wss://play.sme-mc.us" }
+    ];
+
+    // Version cards
+    const grid = document.getElementById("version-grid");
+    VERSIONS.forEach(function (v) {
+      const a = document.createElement("a");
+      a.href = v.href;
+      a.className = "mc-card";
+      if (v.external) { a.target = "_blank"; a.rel = "noopener"; }
+      const h2 = document.createElement("h2");
+      h2.className = "break-words text-[0.7rem] leading-relaxed [text-shadow:2px_2px_0_#3f3f3f] sm:text-xs";
+      h2.textContent = v.name;
+      const small = document.createElement("small");
+      small.className = "mt-3 block text-[0.5rem] " + (v.beta ? "text-gold" : "text-stonelight");
+      small.textContent = v.label;
+      a.append(h2, small);
+      grid.appendChild(a);
+    });
+
+    // Server rows
+    const hint = document.getElementById("copy-hint");
+    const defaultHint = hint.textContent;
+
+    function copyText(text, btn) {
+      const done = function () {
+        hint.textContent = "Copied " + text + "!";
+        btn.textContent = "Copied IP!";
+        btn.dataset.copied = "true";
+        clearTimeout(btn._t);
+        btn._t = setTimeout(function () {
+          btn.textContent = "Copy IP";
+          delete btn.dataset.copied;
+          hint.textContent = defaultHint;
+        }, 1800);
+      };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {});
+      } else {
+        const t = document.createElement("textarea");
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        t.remove();
+        done();
+      }
+    }
+
+    const rows = document.getElementById("server-rows");
+    SERVERS.forEach(function (s) {
+      const row = document.createElement("div");
+      row.className = "mb-3 flex flex-wrap items-center gap-3 border-[3px] border-black p-3 text-left shadow-[inset_-3px_-3px_0_rgba(0,0,0,.35),inset_3px_3px_0_rgba(255,255,255,.08)] " + (s.main ? "bg-[#3f6a24]" : "bg-dirt");
+
+      const info = document.createElement("div");
+      info.className = "min-w-0 flex-1 basis-52";
+      const name = document.createElement("span");
+      name.className = "block text-[0.6rem] leading-relaxed [text-shadow:2px_2px_0_#2a2a2a]";
+      name.textContent = (s.main ? "\u2605 " : "") + s.name;
+      const ip = document.createElement("span");
+      ip.className = "mt-1.5 block break-all text-[0.5rem] text-stonelight";
+      ip.textContent = s.ip;
+      info.append(name, ip);
+
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "mc-btn min-w-[8.5rem] px-3 py-2.5";
+      copy.textContent = "Copy IP";
+      copy.addEventListener("click", function () { copyText(s.ip, copy); });
+
+      const join = document.createElement("a");
+      join.className = "mc-btn inline-block px-3 py-2.5";
+      join.textContent = "Join";
+      join.target = "_blank";
+      join.rel = "noopener";
+      join.href = "https://eaglercraft.com/play?joinServer=" + encodeURIComponent(s.ip) + "&version=1.8.8";
+
+      row.append(info, copy, join);
+      rows.appendChild(row);
+    });
+
+    // Tab switching
+    document.querySelectorAll(".tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        const target = tab.dataset.tab;
+        document.querySelectorAll(".tab").forEach(function (t) { t.dataset.active = String(t === tab); });
+        document.querySelectorAll(".tab-play").forEach(function (el) { el.hidden = target !== "play"; });
+        document.querySelectorAll(".tab-servers").forEach(function (el) { el.hidden = target !== "servers"; });
+      });
+    });
+  </script>
+</body>
+
+</html>
+>>>>>>> 1cae9f6 (updating version again)
